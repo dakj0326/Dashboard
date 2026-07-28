@@ -27,9 +27,9 @@ final class NewsBackground extends Canvas {
         }.start();
     }
 
-    void setActive(boolean active) {
-        this.active = active;
-        if (active) {
+    void setActive(boolean visible, boolean animated) {
+        this.active = visible && animated;
+        if (visible) {
             lastFrame = 0;
             draw();
         }

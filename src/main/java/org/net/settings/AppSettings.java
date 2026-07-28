@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Properties;
+import java.util.Map;
 
 public final class AppSettings {
     private static final Path SETTINGS_DIRECTORY = Path.of(
@@ -54,6 +55,11 @@ public final class AppSettings {
 
     public synchronized void setBoolean(String key, boolean value) {
         set(key, Boolean.toString(value));
+    }
+
+    public synchronized void setAll(Map<String, String> entries) {
+        values.putAll(entries);
+        save();
     }
 
     public synchronized void remove(String key) {

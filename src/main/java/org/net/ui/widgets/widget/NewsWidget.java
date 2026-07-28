@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.net.news.NewsArticle;
 import org.net.news.NewsService;
+import org.net.settings.AppSettings;
 import org.net.system.HealthSeverity;
 import org.net.system.SystemHealthService;
 import org.net.ui.widgets.BaseWidget;
@@ -36,7 +37,7 @@ public final class NewsWidget extends BaseWidget {
     private final NewsBackground background = new NewsBackground();
     private final StackPane viewport = new StackPane();
     private final VBox articleView = new VBox(8);
-    private final PauseTransition rotationDelay = new PauseTransition(javafx.util.Duration.seconds(16));
+    private final PauseTransition rotationDelay = new PauseTransition();
     private final ScheduledExecutorService poller;
     private final AtomicBoolean fetching = new AtomicBoolean();
     private List<NewsArticle> articles = List.of();
@@ -88,7 +89,9 @@ public final class NewsWidget extends BaseWidget {
 
     private void updateActivity() {
         boolean active = enabled && dashboardVisible;
-        background.setActive(active);
+        boolean animateBackground = !AppSettings.getInstance()
+                .getBoolean("news.staticBackground", false);
+        background.setActive(active, animateBackground);
         if (active) {
             refreshIfActive();
             scheduleRotation();
@@ -167,7 +170,20 @@ public final class NewsWidget extends BaseWidget {
     private void scheduleRotation() {
         rotationDelay.stop();
         if (enabled && dashboardVisible && articles.size() > 1) {
+            rotationDelay.setDuration(javafx.util.Duration.seconds(rotationSeconds()));
             rotationDelay.playFromStart();
+        }
+    }
+
+    private static int rotationSeconds() {
+        try {
+            int seconds = Integer.parseInt(AppSettings.getInstance().get(
+                    "news.rotationSeconds",
+                    "16"
+            ));
+            return Math.max(5, Math.min(60, seconds));
+        } catch (NumberFormatException exception) {
+            return 16;
         }
     }
 

@@ -17,6 +17,28 @@
     -fx-font-size: 13px;
 }
 
+.version-badge {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 7;
+    -fx-background-radius: 7;
+    -fx-border-color: -divider;
+    -fx-border-radius: 7;
+}
+
+.update-button {
+    -fx-background-color: -accent-light;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 14;
+    -fx-background-radius: 9;
+    -fx-cursor: hand;
+}
+.update-button:hover { -fx-opacity: 0.86; }
+
 .status-pill {
     -fx-font-size: 10px;
     -fx-font-weight: bold;

@@ -20,7 +20,14 @@
 .spotify-progress-track,
 .spotify-progress-fill,
 .weather-hour,
+.widget-order-row,
+.widget-order-button,
+.stock-setting-row,
+.stock-setting-action,
+.stock-row,
 .invalid-text-field,
+.version-badge,
+.update-button,
 .status-pill {
     -fx-background-radius: 0;
     -fx-border-radius: 0;

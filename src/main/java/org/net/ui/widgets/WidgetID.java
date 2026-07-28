@@ -4,5 +4,6 @@ public enum WidgetID {
     CLOCK,
     SPOTIFY,
     WEATHER,
-    NEWS
+    NEWS,
+    STOCKS
 }

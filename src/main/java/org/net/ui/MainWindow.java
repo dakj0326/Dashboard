@@ -4,12 +4,15 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -30,14 +33,18 @@ import org.net.ui.widgets.widget.ClockWidget;
 import org.net.ui.widgets.widget.SpotifyWidget;
 import org.net.ui.widgets.widget.WeatherWidget;
 import org.net.ui.widgets.widget.NewsWidget;
+import org.net.ui.widgets.widget.StockWidget;
 import org.net.settings.AppSettings;
 import org.net.system.HealthSeverity;
 import org.net.system.SystemHealthService;
+import org.net.AppVersion;
+import org.net.update.UpdateService;
 
 public class MainWindow {
 
     private final Stage stage;
     private final WidgetManager widgetManager = new WidgetManager();
+    private final UpdateService updateService = new UpdateService();
 
     private final DashboardPage overview = new DashboardPage();
     private final WidgetsPage widgetsPage = new WidgetsPage();
@@ -46,6 +53,7 @@ public class MainWindow {
     private final Label pageTitle = new Label();
     private final Label pageSubtitle = new Label();
     private final HBox topBar = new HBox();
+    private final Button updateButton = new Button("Update");
     private PageButton overviewButton;
     private PageButton dashboardButton;
     private PageButton settingsButton;
@@ -67,6 +75,7 @@ public class MainWindow {
         widgetManager.registerWidget(WidgetID.SPOTIFY, new WidgetEntry(new SpotifyWidget()));
         widgetManager.registerWidget(WidgetID.WEATHER, new WidgetEntry(new WeatherWidget()));
         widgetManager.registerWidget(WidgetID.NEWS, new WidgetEntry(new NewsWidget()));
+        widgetManager.registerWidget(WidgetID.STOCKS, new WidgetEntry(new StockWidget()));
 
         createWindow();
     }
@@ -152,6 +161,10 @@ public class MainWindow {
 
         pageTitle.getStyleClass().add("top-section-title");
         pageSubtitle.getStyleClass().add("top-section-subtitle");
+        Label version = new Label("v" + AppVersion.VERSION);
+        version.getStyleClass().add("version-badge");
+        HBox titleRow = new HBox(9, pageTitle, version);
+        titleRow.setAlignment(Pos.CENTER_LEFT);
 
         Label status = new Label();
         status.getStyleClass().add("status-pill");
@@ -159,13 +172,54 @@ public class MainWindow {
         health.severityProperty().addListener((observable, oldValue, newValue) ->
                 updateHealthStatus(status, newValue));
         updateHealthStatus(status, health.getSeverity());
+        configureUpdateButton();
 
-        titleContainer.getChildren().addAll(pageTitle, pageSubtitle);
-        topBarContent.getChildren().addAll(titleContainer, status);
+        titleContainer.getChildren().addAll(titleRow, pageSubtitle);
+        topBarContent.getChildren().addAll(titleContainer, updateButton, status);
         topBar.getChildren().add(topBarContent);
         HBox.setHgrow(topBarContent, javafx.scene.layout.Priority.ALWAYS);
 
         root.setTop(topBar);
+    }
+
+    private void configureUpdateButton() {
+        updateButton.getStyleClass().add("update-button");
+        updateButton.visibleProperty().bind(updateService.updateAvailableProperty());
+        updateButton.managedProperty().bind(updateButton.visibleProperty());
+        updateButton.setOnAction(event -> requestUpdate());
+    }
+
+    private void requestUpdate() {
+        if (!updateService.isWorkingTreeClean()) {
+            Alert blocked = new Alert(Alert.AlertType.WARNING);
+            blocked.setTitle("Update unavailable");
+            blocked.setHeaderText("Local project changes must be committed first");
+            blocked.setContentText(
+                    "The updater will not overwrite uncommitted or untracked files."
+            );
+            blocked.showAndWait();
+            return;
+        }
+
+        Alert confirmation = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "The app will close, download origin/main, compile it and restart.",
+                ButtonType.CANCEL,
+                ButtonType.OK
+        );
+        confirmation.setTitle("Update Dashboard");
+        confirmation.setHeaderText("Install the available update?");
+        if (confirmation.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
+
+        if (updateService.launchUpdater()) {
+            Platform.exit();
+        } else {
+            Alert failed = new Alert(Alert.AlertType.ERROR);
+            failed.setTitle("Update failed");
+            failed.setHeaderText("The updater could not be started");
+            failed.setContentText("Make sure update-dashboard.ps1 exists in the project folder.");
+            failed.showAndWait();
+        }
     }
 
     private void updateHealthStatus(Label status, HealthSeverity severity) {
