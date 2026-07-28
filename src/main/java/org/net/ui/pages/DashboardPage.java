@@ -113,7 +113,9 @@ public class DashboardPage extends BorderPane {
     private void updateGreeting() {
         int hour = LocalTime.now().getHour();
         String salutation;
-        if (hour >= 5 && hour < 12) {
+        if (hour < 5) {
+            salutation = "Good night";
+        } else if (hour < 12) {
             salutation = "Good morning";
         } else if (hour < 18) {
             salutation = "Good afternoon";
