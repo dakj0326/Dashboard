@@ -20,12 +20,12 @@
 .version-badge {
     -fx-background-color: -control-background;
     -fx-text-fill: -muted-text;
-    -fx-font-size: 9px;
+    -fx-font-size: 10px;
     -fx-font-weight: bold;
-    -fx-padding: 3 7;
-    -fx-background-radius: 7;
+    -fx-padding: 4 9;
+    -fx-background-radius: 8;
     -fx-border-color: -divider;
-    -fx-border-radius: 7;
+    -fx-border-radius: 8;
 }
 
 .update-button {
