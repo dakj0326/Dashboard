@@ -255,6 +255,7 @@ public class DashboardPage extends BorderPane {
             case "api.weather" -> "Weather service unavailable";
             case "api.news" -> "News services unavailable";
             case "api.stocks" -> "Stock data unavailable";
+            case "update.check" -> "Update check unavailable";
             default -> "A system component requires attention";
         };
     }

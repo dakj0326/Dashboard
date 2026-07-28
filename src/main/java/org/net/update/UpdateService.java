@@ -13,12 +13,16 @@ import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
+import org.net.system.HealthSeverity;
+import org.net.system.SystemHealthService;
 
 public final class UpdateService {
     private static final long CHECK_INTERVAL_MINUTES = 10;
+    private static final String HEALTH_SOURCE = "update.check";
     private final Path projectRoot = resolveProjectRoot();
     private final String operatingSystem =
             System.getProperty("os.name", "").toLowerCase();
+    private final SystemHealthService health = SystemHealthService.getInstance();
     private final ReadOnlyBooleanWrapper updateAvailable = new ReadOnlyBooleanWrapper(false);
     private final ScheduledExecutorService checker;
 
@@ -68,6 +72,7 @@ public final class UpdateService {
 
     private void checkForUpdate() {
         if (!isSupported() || !Files.isDirectory(projectRoot.resolve(".git"))) {
+            reportCheckFailure();
             setAvailable(false);
             return;
         }
@@ -76,6 +81,7 @@ public final class UpdateService {
                 Duration.ofSeconds(30)
         );
         if (!fetch.success()) {
+            reportCheckFailure();
             setAvailable(false);
             return;
         }
@@ -84,10 +90,21 @@ public final class UpdateService {
                 Duration.ofSeconds(10)
         );
         try {
-            setAvailable(behind.success() && Integer.parseInt(behind.output().strip()) > 0);
+            if (!behind.success()) {
+                reportCheckFailure();
+                setAvailable(false);
+                return;
+            }
+            setAvailable(Integer.parseInt(behind.output().strip()) > 0);
+            health.clear(HEALTH_SOURCE);
         } catch (NumberFormatException exception) {
+            reportCheckFailure();
             setAvailable(false);
         }
+    }
+
+    private void reportCheckFailure() {
+        health.report(HEALTH_SOURCE, HealthSeverity.WARNING);
     }
 
     private CommandResult runGit(List<String> arguments, Duration timeout) {
