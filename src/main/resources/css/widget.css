@@ -32,6 +32,50 @@
     -fx-text-fill: -muted-text;
     -fx-font-size: 11px;
 }
+.timer-content {
+    -fx-spacing: 22;
+}
+.timer-wheel {
+    -fx-cursor: hand;
+}
+.timer-time {
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+}
+.timer-state {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+.timer-button {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-min-width: 76;
+    -fx-pref-width: 76;
+    -fx-min-height: 34;
+    -fx-background-radius: 9;
+    -fx-border-color: -divider;
+    -fx-border-radius: 9;
+    -fx-cursor: hand;
+}
+.timer-button:hover {
+    -fx-background-color: -left-sidebar-button-hover;
+}
+.timer-primary-button {
+    -fx-background-color: #202936;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: -accent;
+}
+.timer-primary-button:hover {
+    -fx-background-color: #2B3747;
+    -fx-text-fill: #FFFFFF;
+}
+.timer-button:disabled {
+    -fx-opacity: 0.36;
+}
 .spotify-artwork {
     -fx-background-color: -control-background;
     -fx-background-radius: 10;

@@ -1,7 +1,7 @@
 .top-section {
     -fx-background-color: -top-background;
-    -fx-padding: 20 30;
-    -fx-pref-height: 104;
+    -fx-padding: 12 30;
+    -fx-pref-height: 88;
     -fx-border-color: -divider;
     -fx-border-width: 0 0 1 0;
 }
@@ -43,6 +43,22 @@
 .update-button:hover {
     -fx-background-color: #2B3747;
     -fx-text-fill: #FFFFFF;
+}
+.restart-button {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 9 14;
+    -fx-background-radius: 9;
+    -fx-border-color: -divider;
+    -fx-border-width: 1;
+    -fx-border-radius: 9;
+    -fx-cursor: hand;
+}
+.restart-button:hover {
+    -fx-background-color: -left-sidebar-button-hover;
+    -fx-text-fill: -top-text;
 }
 
 .app-dialog {

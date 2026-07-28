@@ -62,13 +62,23 @@ public final class UpdateService {
     public boolean launchUpdater() {
         List<String> command = updaterCommand();
         if (command.isEmpty()) return false;
+        return launchHelper(command, "dashboard-updater-launch.log");
+    }
+
+    public boolean launchRestart() {
+        List<String> command = restartCommand();
+        if (command.isEmpty()) return false;
+        return launchHelper(command, "dashboard-restart-launch.log");
+    }
+
+    private boolean launchHelper(List<String> command, String launchLog) {
         try {
             ProcessBuilder builder = new ProcessBuilder(command)
                     .directory(projectRoot.toFile());
             if (!isWindows()) {
                 builder.redirectErrorStream(true);
                 builder.redirectOutput(ProcessBuilder.Redirect.appendTo(
-                        projectRoot.resolve("dashboard-updater-launch.log").toFile()
+                        projectRoot.resolve(launchLog).toFile()
                 ));
             }
             builder.start();
@@ -174,6 +184,28 @@ public final class UpdateService {
         }
         if (isLinux()) {
             Path script = projectRoot.resolve("update-dashboard.sh");
+            if (!Files.isRegularFile(script)) return List.of();
+            return List.of("/bin/bash", script.toString(), projectRoot.toString(), pid);
+        }
+        return List.of();
+    }
+
+    private List<String> restartCommand() {
+        String pid = Long.toString(ProcessHandle.current().pid());
+        if (isWindows()) {
+            Path script = projectRoot.resolve("restart-dashboard.ps1");
+            if (!Files.isRegularFile(script)) return List.of();
+            return List.of(
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-ExecutionPolicy", "Bypass",
+                    "-File", script.toString(),
+                    "-ProjectPath", projectRoot.toString(),
+                    "-ProcessId", pid
+            );
+        }
+        if (isLinux()) {
+            Path script = projectRoot.resolve("restart-dashboard.sh");
             if (!Files.isRegularFile(script)) return List.of();
             return List.of("/bin/bash", script.toString(), projectRoot.toString(), pid);
         }

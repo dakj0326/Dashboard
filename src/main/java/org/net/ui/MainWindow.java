@@ -35,6 +35,7 @@ import org.net.ui.widgets.widget.SpotifyWidget;
 import org.net.ui.widgets.widget.WeatherWidget;
 import org.net.ui.widgets.widget.NewsWidget;
 import org.net.ui.widgets.widget.StockWidget;
+import org.net.ui.widgets.widget.TimerWidget;
 import org.net.settings.AppSettings;
 import org.net.system.HealthSeverity;
 import org.net.system.SystemHealthService;
@@ -55,6 +56,7 @@ public class MainWindow {
     private final Label pageSubtitle = new Label();
     private final HBox topBar = new HBox();
     private final Button updateButton = new Button("UPDATE AVAILABLE");
+    private final Button restartButton = new Button("RESTART");
     private PageButton overviewButton;
     private PageButton dashboardButton;
     private PageButton settingsButton;
@@ -77,6 +79,7 @@ public class MainWindow {
         widgetManager.registerWidget(WidgetID.WEATHER, new WidgetEntry(new WeatherWidget()));
         widgetManager.registerWidget(WidgetID.NEWS, new WidgetEntry(new NewsWidget()));
         widgetManager.registerWidget(WidgetID.STOCKS, new WidgetEntry(new StockWidget()));
+        widgetManager.registerWidget(WidgetID.TIMER, new WidgetEntry(new TimerWidget()));
 
         createWindow();
     }
@@ -151,6 +154,7 @@ public class MainWindow {
         HBox topBarContent = new HBox();
         topBarContent.setAlignment(Pos.CENTER_LEFT);
         topBarContent.setMaxWidth(Double.MAX_VALUE);
+        topBarContent.setSpacing(10);
 
         VBox titleContainer = new VBox(2);
         titleContainer.getStyleClass().add("top-section-content");
@@ -174,9 +178,15 @@ public class MainWindow {
                 updateHealthStatus(status, newValue));
         updateHealthStatus(status, health.getSeverity());
         configureUpdateButton();
+        configureRestartButton();
 
         titleContainer.getChildren().addAll(titleRow, pageSubtitle);
-        topBarContent.getChildren().addAll(titleContainer, updateButton, status);
+        topBarContent.getChildren().addAll(
+                titleContainer,
+                updateButton,
+                restartButton,
+                status
+        );
         topBar.getChildren().add(topBarContent);
         HBox.setHgrow(topBarContent, javafx.scene.layout.Priority.ALWAYS);
 
@@ -189,6 +199,27 @@ public class MainWindow {
         updateButton.managedProperty().bind(updateButton.visibleProperty());
         updateButton.setOnAction(event -> requestUpdate());
         updateService.start();
+    }
+
+    private void configureRestartButton() {
+        restartButton.getStyleClass().add("restart-button");
+        restartButton.setOnAction(event -> restartApplication());
+    }
+
+    private void restartApplication() {
+        if (updateService.launchRestart()) {
+            Platform.exit();
+            return;
+        }
+        Alert failed = new Alert(Alert.AlertType.ERROR);
+        failed.setTitle("Restart failed");
+        failed.setHeaderText("The application could not be restarted");
+        failed.setContentText(
+                "Make sure the restart script for this operating system exists "
+                        + "in the project folder."
+        );
+        styleUpdateDialog(failed);
+        failed.showAndWait();
     }
 
     private void requestUpdate() {
