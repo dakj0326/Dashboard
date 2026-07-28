@@ -217,7 +217,10 @@ public class MainWindow {
             Alert failed = new Alert(Alert.AlertType.ERROR);
             failed.setTitle("Update failed");
             failed.setHeaderText("The updater could not be started");
-            failed.setContentText("Make sure update-dashboard.ps1 exists in the project folder.");
+            failed.setContentText(
+                    "Make sure the updater script for this operating system exists "
+                            + "in the project folder."
+            );
             failed.showAndWait();
         }
     }
