@@ -39,3 +39,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.named<JavaExec>("run") {
+    systemProperty("dashboard.projectDir", project.projectDir.absolutePath)
+}

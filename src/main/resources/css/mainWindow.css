@@ -29,15 +29,21 @@
 }
 
 .update-button {
-    -fx-background-color: -accent-light;
-    -fx-text-fill: white;
-    -fx-font-size: 11px;
+    -fx-background-color: #202936;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-padding: 8 14;
-    -fx-background-radius: 9;
+    -fx-padding: 10 17;
+    -fx-background-radius: 10;
+    -fx-border-color: -accent;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
     -fx-cursor: hand;
 }
-.update-button:hover { -fx-opacity: 0.86; }
+.update-button:hover {
+    -fx-background-color: #2B3747;
+    -fx-text-fill: #FFFFFF;
+}
 
 .status-pill {
     -fx-font-size: 10px;

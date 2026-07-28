@@ -18,13 +18,16 @@ import org.net.system.SystemHealthService;
 
 public final class UpdateService {
     private static final long CHECK_INTERVAL_MINUTES = 10;
-    private static final String HEALTH_SOURCE = "update.check";
+    private static final String REPOSITORY_ISSUE = "update.repository";
+    private static final String FETCH_ISSUE = "update.fetch";
+    private static final String COMPARE_ISSUE = "update.compare";
     private final Path projectRoot = resolveProjectRoot();
     private final String operatingSystem =
             System.getProperty("os.name", "").toLowerCase();
     private final SystemHealthService health = SystemHealthService.getInstance();
     private final ReadOnlyBooleanWrapper updateAvailable = new ReadOnlyBooleanWrapper(false);
     private final ScheduledExecutorService checker;
+    private boolean started;
 
     public UpdateService() {
         checker = Executors.newSingleThreadScheduledExecutor(task -> {
@@ -32,9 +35,14 @@ public final class UpdateService {
             thread.setDaemon(true);
             return thread;
         });
+    }
+
+    public synchronized void start() {
+        if (started) return;
+        started = true;
         checker.scheduleWithFixedDelay(
                 this::checkForUpdate,
-                3,
+                0,
                 CHECK_INTERVAL_MINUTES,
                 TimeUnit.MINUTES
         );
@@ -72,7 +80,7 @@ public final class UpdateService {
 
     private void checkForUpdate() {
         if (!isSupported() || !Files.isDirectory(projectRoot.resolve(".git"))) {
-            reportCheckFailure();
+            reportOnly(REPOSITORY_ISSUE);
             setAvailable(false);
             return;
         }
@@ -81,7 +89,7 @@ public final class UpdateService {
                 Duration.ofSeconds(30)
         );
         if (!fetch.success()) {
-            reportCheckFailure();
+            reportOnly(FETCH_ISSUE);
             setAvailable(false);
             return;
         }
@@ -91,20 +99,31 @@ public final class UpdateService {
         );
         try {
             if (!behind.success()) {
-                reportCheckFailure();
+                reportOnly(COMPARE_ISSUE);
                 setAvailable(false);
                 return;
             }
             setAvailable(Integer.parseInt(behind.output().strip()) > 0);
-            health.clear(HEALTH_SOURCE);
+            clearCheckIssues();
         } catch (NumberFormatException exception) {
-            reportCheckFailure();
+            reportOnly(COMPARE_ISSUE);
             setAvailable(false);
         }
     }
 
-    private void reportCheckFailure() {
-        health.report(HEALTH_SOURCE, HealthSeverity.WARNING);
+    private void reportOnly(String source) {
+        clearCheckIssuesExcept(source);
+        health.report(source, HealthSeverity.WARNING);
+    }
+
+    private void clearCheckIssues() {
+        clearCheckIssuesExcept("");
+    }
+
+    private void clearCheckIssuesExcept(String retainedSource) {
+        if (!REPOSITORY_ISSUE.equals(retainedSource)) health.clear(REPOSITORY_ISSUE);
+        if (!FETCH_ISSUE.equals(retainedSource)) health.clear(FETCH_ISSUE);
+        if (!COMPARE_ISSUE.equals(retainedSource)) health.clear(COMPARE_ISSUE);
     }
 
     private CommandResult runGit(List<String> arguments, Duration timeout) {

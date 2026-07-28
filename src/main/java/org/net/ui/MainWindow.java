@@ -53,7 +53,7 @@ public class MainWindow {
     private final Label pageTitle = new Label();
     private final Label pageSubtitle = new Label();
     private final HBox topBar = new HBox();
-    private final Button updateButton = new Button("Update");
+    private final Button updateButton = new Button("UPDATE AVAILABLE");
     private PageButton overviewButton;
     private PageButton dashboardButton;
     private PageButton settingsButton;
@@ -187,6 +187,7 @@ public class MainWindow {
         updateButton.visibleProperty().bind(updateService.updateAvailableProperty());
         updateButton.managedProperty().bind(updateButton.visibleProperty());
         updateButton.setOnAction(event -> requestUpdate());
+        updateService.start();
     }
 
     private void requestUpdate() {
