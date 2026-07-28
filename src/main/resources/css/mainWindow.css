@@ -45,6 +45,52 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.app-dialog {
+    -fx-background-color: -surface;
+    -fx-border-color: -divider;
+    -fx-border-width: 1;
+}
+.app-dialog > .content.label {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 13px;
+    -fx-padding: 4 20 18 20;
+}
+.app-dialog:header .header-panel {
+    -fx-background-color: -top-background;
+    -fx-padding: 18 20 14 20;
+}
+.app-dialog:header .header-panel .label {
+    -fx-text-fill: -top-text;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+.app-dialog > .button-bar > .container {
+    -fx-background-color: -surface;
+    -fx-padding: 12 18 16 18;
+}
+.app-dialog .button {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-background-radius: 8;
+    -fx-border-color: -divider;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+.app-dialog .button:hover {
+    -fx-background-color: -left-sidebar-button-hover;
+}
+.app-dialog .button:default {
+    -fx-background-color: #202936;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: -accent;
+}
+.app-dialog .button:default:hover {
+    -fx-background-color: #2B3747;
+}
+
 .status-pill {
     -fx-font-size: 10px;
     -fx-font-weight: bold;

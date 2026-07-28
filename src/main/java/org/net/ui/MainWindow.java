@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -198,6 +199,7 @@ public class MainWindow {
             blocked.setContentText(
                     "The updater will not overwrite uncommitted or untracked files."
             );
+            styleUpdateDialog(blocked);
             blocked.showAndWait();
             return;
         }
@@ -210,6 +212,7 @@ public class MainWindow {
         );
         confirmation.setTitle("Update Dashboard");
         confirmation.setHeaderText("Install the available update?");
+        styleUpdateDialog(confirmation);
         if (confirmation.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
 
         if (updateService.launchUpdater()) {
@@ -222,8 +225,16 @@ public class MainWindow {
                     "Make sure the updater script for this operating system exists "
                             + "in the project folder."
             );
+            styleUpdateDialog(failed);
             failed.showAndWait();
         }
+    }
+
+    private void styleUpdateDialog(Alert alert) {
+        alert.initOwner(stage);
+        DialogPane pane = alert.getDialogPane();
+        pane.getStyleClass().add("app-dialog");
+        pane.getStylesheets().setAll(stage.getScene().getStylesheets());
     }
 
     private void updateHealthStatus(Label status, HealthSeverity severity) {

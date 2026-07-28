@@ -28,6 +28,9 @@
 .invalid-text-field,
 .version-badge,
 .update-button,
+.app-dialog,
+.app-dialog .button,
+.app-dialog:header .header-panel,
 .status-pill {
     -fx-background-radius: 0;
     -fx-border-radius: 0;
