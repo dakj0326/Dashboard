@@ -1,0 +1,27 @@
+.widget,
+.dashboard-hero,
+.stat-card,
+.system-card,
+.system-meter-track,
+.system-meter-fill,
+.issues-panel,
+.widgets-empty-state,
+.brand-mark,
+.sidebar-toggle,
+.left-section-button,
+.settings-left-section-button,
+.settings-section,
+.settings-section .combo-box,
+.settings-section .text-field,
+.settings-primary-button,
+.spotify-artwork,
+.spotify-control,
+.spotify-device-menu,
+.spotify-progress-track,
+.spotify-progress-fill,
+.weather-hour,
+.invalid-text-field,
+.status-pill {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}

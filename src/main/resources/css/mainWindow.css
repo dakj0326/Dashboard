@@ -1,0 +1,106 @@
+.top-section {
+    -fx-background-color: -top-background;
+    -fx-padding: 20 30;
+    -fx-pref-height: 104;
+    -fx-border-color: -divider;
+    -fx-border-width: 0 0 1 0;
+}
+
+.top-section-title {
+    -fx-text-fill: -top-text;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+}
+
+.top-section-subtitle {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 13px;
+}
+
+.status-pill {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 9 13;
+    -fx-background-radius: 20;
+}
+.status-ok { -fx-background-color: -success-soft; -fx-text-fill: -success; }
+.status-warning {
+    -fx-background-color: rgba(220, 165, 65, 0.14);
+    -fx-text-fill: #D8A84E;
+}
+.status-critical {
+    -fx-background-color: rgba(215, 80, 90, 0.14);
+    -fx-text-fill: #E06E78;
+}
+
+.left-section {
+    -fx-background-color: -left-sidebar-background;
+    -fx-pref-width: 238;
+    -fx-padding: 26 16 18 16;
+    -fx-spacing: 14;
+    -fx-border-color: -divider;
+    -fx-border-width: 0 1 0 0;
+}
+
+.sidebar-header {
+    -fx-padding: 0 0 24 0;
+}
+.sidebar-toggle {
+    -fx-background-color: -surface;
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 0;
+    -fx-min-width: 34;
+    -fx-pref-width: 34;
+    -fx-max-width: 34;
+    -fx-min-height: 34;
+    -fx-pref-height: 34;
+    -fx-background-radius: 9;
+    -fx-border-color: -divider;
+    -fx-border-radius: 9;
+    -fx-cursor: hand;
+}
+.sidebar-toggle:hover {
+    -fx-background-color: -left-sidebar-button-hover;
+    -fx-border-color: -accent-border;
+}
+.sidebar-toggle:pressed {
+    -fx-background-color: -left-sidebar-button-pressed;
+}
+.brand-mark {
+    -fx-background-color: -accent;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-min-width: 38;
+    -fx-min-height: 38;
+    -fx-background-radius: 11;
+}
+.brand-name { -fx-text-fill: -primary-text; -fx-font-size: 14px; -fx-font-weight: bold; }
+.brand-tagline { -fx-text-fill: -muted-text; -fx-font-size: 9px; }
+.sidebar-label {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 10 2 10;
+}
+
+.left-section-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -left-sidebar-button-text;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 14;
+    -fx-background-radius: 10;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+.left-section-button:hover { -fx-background-color: -left-sidebar-button-hover; }
+.left-section-button:pressed { -fx-background-color: -left-sidebar-button-pressed; }
+.left-section-button.selected {
+    -fx-background-color: -left-sidebar-button-selected;
+    -fx-text-fill: -left-sidebar-button-selected-text;
+}

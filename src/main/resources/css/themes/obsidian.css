@@ -1,0 +1,15 @@
+.root {
+    -fx-base: #0B0B0C; -fx-font-family: "Segoe UI", sans-serif; -fx-text-fill: #F1F1F1;
+    -dashboard-background: #09090A; -left-sidebar-background: #050506;
+    -left-sidebar-button-hover: #171719; -left-sidebar-button-pressed: #222225;
+    -left-sidebar-button-selected: #252527; -left-sidebar-button-selected-text: #FFFFFF;
+    -left-sidebar-button-text: #99999F; -top-background: #0E0E10; -top-text: #F5F5F5;
+    -primary-text: #EEEEF0; -muted-text: #77777F; -surface: #141416;
+    -control-background: #0C0C0E; -divider: rgba(255,255,255,0.08);
+    -accent: #E8E8EA; -accent-light: #FFFFFF; -accent-border: rgba(255,255,255,0.38);
+    -success: #7DD3A7; -success-soft: rgba(125,211,167,0.09);
+    -hero-background: linear-gradient(to right, #222225, #171719); -hero-border: rgba(255,255,255,0.09);
+    -widget-background: #141416; -widget-border: rgba(255,255,255,0.08); -widget-header-text: #F5F5F5;
+    -shadow: rgba(0,0,0,0.38); -clock-face: #09090A; -clock-border: #3B3B40;
+    -clock-tick: #C4C4C8; -clock-minor-tick: #38383C; -clock-second: #FFFFFF;
+}

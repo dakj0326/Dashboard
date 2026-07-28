@@ -1,0 +1,88 @@
+.settings-page { -fx-background-color: -dashboard-background; -fx-padding: 24; }
+.settings-content {
+    -fx-background-color: transparent;
+    -fx-padding: 4 20 0 0;
+    -fx-spacing: 8;
+    -fx-pref-width: 190;
+}
+.settings-left-section-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -left-sidebar-button-text;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 11 14;
+    -fx-background-radius: 9;
+}
+.settings-left-section-button:hover { -fx-background-color: -left-sidebar-button-hover; }
+.settings-left-section-button.selected {
+    -fx-background-color: -left-sidebar-button-selected;
+    -fx-text-fill: -left-sidebar-button-selected-text;
+}
+.settings-scroll, .settings-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+.settings-scroll { -fx-border-width: 0; }
+.settings-page-title { -fx-text-fill: -primary-text; -fx-font-size: 24px; -fx-font-weight: bold; }
+.settings-page-subtitle { -fx-text-fill: -muted-text; -fx-font-size: 12px; -fx-padding: 0 0 10 0; }
+.settings-section {
+    -fx-background-color: -surface;
+    -fx-padding: 20 22;
+    -fx-spacing: 14;
+    -fx-background-radius: 13;
+    -fx-border-color: -divider;
+    -fx-border-radius: 13;
+}
+.settings-section-title { -fx-text-fill: -primary-text; -fx-font-size: 15px; -fx-font-weight: bold; }
+.settings-section-content { -fx-padding: 0; }
+.settings-section .check-box { -fx-text-fill: -primary-text; -fx-font-size: 13px; }
+.settings-help {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 12px;
+    -fx-line-spacing: 2px;
+}
+.settings-field-label {
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.settings-section .text-field {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -primary-text;
+    -fx-prompt-text-fill: -muted-text;
+    -fx-border-color: -divider;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
+}
+.readonly-field { -fx-opacity: 0.82; }
+.settings-primary-button {
+    -fx-background-color: derive(-control-background, 18%);
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 15;
+    -fx-background-radius: 8;
+    -fx-border-color: -accent-border;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+.settings-primary-button:hover { -fx-opacity: 0.88; }
+.spotify-connection-status { -fx-text-fill: -muted-text; -fx-font-size: 12px; }
+.widget-visibility-check {
+    -fx-padding: 8 0;
+    -fx-font-size: 13px;
+}
+.settings-section .combo-box {
+    -fx-background-color: -control-background;
+    -fx-border-color: -divider;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.settings-section .combo-box .list-cell { -fx-text-fill: -primary-text; }
+.invalid-text-field {
+    -fx-border-color: #ef4444;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}

@@ -1,0 +1,64 @@
+# ============================================================
+# PRIVATE APPLICATION SETTINGS
+# Never commit these files. They may contain Spotify tokens,
+# client IDs, user names, locations and other personal settings.
+# ============================================================
+/.kjellberius-dashboard/
+**/.kjellberius-dashboard/
+/settings.properties
+/settings.properties.tmp
+**/settings.properties
+**/settings.properties.tmp
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+secrets/
+*.secret
+*.secrets
+local.properties
+
+# Gradle and Java build output
+/.gradle/
+/build/
+/out/
+/bin/
+/target/
+*.class
+*.jar
+*.war
+*.ear
+!gradle/wrapper/gradle-wrapper.jar
+hs_err_pid*
+replay_pid*
+
+# IDE configuration
+/.idea/
+/.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*~
+
+# Local certificates and private keys
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

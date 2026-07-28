@@ -1,0 +1,132 @@
+.widget {
+    -fx-background-color: -widget-background;
+    -fx-border-color: -widget-border;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, -shadow, 13, 0.04, 0, 4);
+}
+.widget:hover { -fx-border-color: -accent-border; }
+.widget-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -widget-header-text;
+}
+.clock-face { -fx-background-color: transparent; }
+.clock-rim { -fx-fill: -clock-face; -fx-stroke: -clock-border; -fx-stroke-width: 2; }
+.clock-hour-tick { -fx-stroke: -clock-tick; -fx-stroke-width: 2.4; }
+.clock-minute-tick { -fx-stroke: -clock-minor-tick; -fx-stroke-width: 1; }
+.clock-pin { -fx-fill: -clock-second; -fx-stroke: -clock-face; -fx-stroke-width: 2; }
+.clock-date {
+    -fx-text-fill: -clock-tick;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+.digital-clock-time {
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+.digital-clock-date {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 11px;
+}
+.spotify-artwork {
+    -fx-background-color: -control-background;
+    -fx-background-radius: 10;
+    -fx-border-color: -divider;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+}
+.spotify-title {
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.spotify-artist { -fx-text-fill: -muted-text; -fx-font-size: 11px; }
+.spotify-time .label { -fx-text-fill: -muted-text; -fx-font-size: 9px; }
+.spotify-progress-track {
+    -fx-background-color: -control-background;
+    -fx-background-radius: 4;
+    -fx-border-color: -divider;
+    -fx-border-radius: 4;
+}
+.spotify-progress-fill {
+    -fx-background-color: -accent-light;
+    -fx-background-radius: 4;
+}
+.spotify-control {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 13px;
+    -fx-min-width: 38;
+    -fx-min-height: 38;
+    -fx-background-radius: 19;
+    -fx-border-color: -divider;
+    -fx-border-radius: 19;
+    -fx-cursor: hand;
+}
+.spotify-control:hover { -fx-border-color: -accent-border; }
+.spotify-control:disabled { -fx-opacity: 0.38; }
+.spotify-device-menu {
+    -fx-background-color: -control-background;
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 11px;
+    -fx-min-height: 38;
+    -fx-pref-height: 38;
+    -fx-padding: 0 8;
+    -fx-background-radius: 9;
+    -fx-border-color: -divider;
+    -fx-border-radius: 9;
+    -fx-cursor: hand;
+}
+.spotify-device-menu:hover { -fx-border-color: -accent-border; }
+.spotify-device-menu > .label { -fx-text-fill: -primary-text; }
+.spotify-device-menu:disabled { -fx-opacity: 0.38; }
+.weather-location { -fx-text-fill: -muted-text; -fx-font-size: 10px; -fx-font-weight: bold; }
+.weather-temperature { -fx-text-fill: -primary-text; -fx-font-size: 34px; -fx-font-weight: bold; }
+.weather-current-icon { -fx-text-fill: -primary-text; -fx-font-size: 30px; }
+.weather-hour {
+    -fx-background-color: -control-background;
+    -fx-padding: 9 6;
+    -fx-background-radius: 9;
+    -fx-border-color: -divider;
+    -fx-border-radius: 9;
+    -fx-min-width: 49;
+}
+.weather-hour .label { -fx-text-fill: -muted-text; -fx-font-size: 10px; }
+.weather-hour .weather-hour-icon { -fx-font-size: 18px; -fx-text-fill: -primary-text; }
+.weather-hour .weather-hour-temperature {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -primary-text;
+}
+.weather-message { -fx-text-fill: -muted-text; -fx-font-size: 12px; }
+.weather-attribution {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 8px;
+}
+.news-viewport { -fx-cursor: hand; }
+.news-article { -fx-padding: 2 1 0 1; }
+.news-source {
+    -fx-text-fill: -accent-light;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+.news-age { -fx-text-fill: -muted-text; -fx-font-size: 9px; }
+.news-title {
+    -fx-text-fill: -primary-text;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+.news-summary {
+    -fx-text-fill: -muted-text;
+    -fx-font-size: 10px;
+}
+.news-open {
+    -fx-text-fill: -accent-light;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+.news-message { -fx-text-fill: -muted-text; -fx-font-size: 12px; }
